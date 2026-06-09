@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Crossover – Independent Reading Simulation</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1f2937;--muted:#6b7280;--accent:#5b21b6;--accent2:#f97316;--good:#047857;--bad:#b91c1c;--warn:#b45309;--soft:#ede9fe;--line:#d1d5db}
+*{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.45} header{background:linear-gradient(135deg,var(--accent),#111827);color:white;padding:24px 16px;text-align:center} header h1{margin:0;font-size:1.75rem} header p{max-width:930px;margin:8px auto 0}.wrap{max-width:1120px;margin:0 auto;padding:16px}.topbar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:10;padding:10px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 8px #0001}.progress{height:12px;background:#e5e7eb;border-radius:30px;overflow:hidden;flex:1}.progress div{height:100%;width:0;background:var(--accent2);transition:.3s}.timer{font-weight:bold;color:var(--accent);min-width:55px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0;box-shadow:0 4px 14px #0000000c}.mission{border-left:7px solid var(--accent);background:var(--soft)}h2{margin-top:0;color:#24124d}h3{color:#3b2a75;margin-bottom:6px}.pill{display:inline-block;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:999px;padding:3px 9px;margin:2px;font-size:.9rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px}.box{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fafafa}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}textarea,input,select{width:100%;padding:10px;border:1px solid #aaa;border-radius:8px;font-size:1rem;background:white}textarea{min-height:95px;resize:vertical}.small{font-size:.9rem;color:var(--muted)}button{background:var(--accent);color:white;border:0;border-radius:9px;padding:10px 14px;font-weight:bold;cursor:pointer;margin:5px 5px 5px 0}button.secondary{background:#374151}button.print{background:#0f766e}.feedback{margin-top:10px;padding:10px;border-radius:10px;background:#f3f4f6}.ok{border-left:5px solid var(--good)}.warn{border-left:5px solid var(--bad)}.note{border-left:5px solid var(--warn)}.hint{background:#fffbeb;border-left:5px solid var(--accent2);padding:10px;border-radius:8px}.taskDone{float:right;color:var(--good);font-weight:bold}.wordbank{line-height:2}.checklist label{display:block;margin:7px 0}.rubric td,.rubric th{border:1px solid #ddd;padding:8px;vertical-align:top}.rubric{border-collapse:collapse;width:100%;font-size:.95rem}.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.tab{background:#e5e7eb;color:#111827}.tab.active{background:var(--accent);color:#fff}.hidden{display:none}.vocabTable{width:100%;border-collapse:collapse;font-size:.95rem}.vocabTable th,.vocabTable td{border:1px solid #ddd;padding:7px}.vocabTable th{background:#f3f4f6}.paper{background:#f8fafc;border:1px dashed #94a3b8}.sentence{background:#f9fafb;border-left:4px solid #c4b5fd;padding:8px;border-radius:6px;margin:6px 0}.score{font-weight:bold}.mini{min-height:55px}.choice label{display:block;padding:7px;margin:5px 0;background:#fff;border:1px solid #ddd;border-radius:8px}.footer{font-size:.85rem;color:#666;text-align:center;margin:20px 0}@media(max-width:750px){.two{grid-template-columns:1fr}.topbar{flex-wrap:wrap}}@media print{.topbar,button,.tabs{display:none}.card{break-inside:avoid;box-shadow:none}body{background:white}}
+</style>
+</head>
+<body>
+<header>
+<h1>🏀 The Crossover – Locker Room Mission</h1>
+<p>Independent 90-minute reading simulation for A2/B1 learners. Work with your printed student book pages.</p>
+</header>
+<div class="topbar"><span class="timer" id="timer">90:00</span><div class="progress"><div id="bar"></div></div><button class="secondary" onclick="saveWork()">Save in browser</button><button class="print" onclick="downloadWork()">Download results</button><button class="secondary" onclick="copyWork()">Copy results</button><button class="secondary" onclick="loadWork()">Load saved work</button></div>
+<div class="wrap">
+<section class="card mission">
+<h2>Mission Briefing</h2>
+<p>You are part of the school basketball team’s support group. Josh and JB are twins, brothers and teammates. Something changes between them. Your mission is to understand the five text parts in the correct order and explain the conflict.</p>
+<div class="hint"><b>You need:</b> your printed text pages, paper, a pen and this website. Do the paper tasks carefully. Your teacher can check them later.</div>
+<p><b>Work rule:</b> First read the text part in your book. Then complete the online task. Then write the paper task.</p>
+</section>
+
+<section class="card" id="vocab">
+<span class="taskDone" id="doneV"></span><h2>Vocabulary Chapter – Check words before and during reading ⏱ 12 min</h2>
+<p>The teacher’s book marks new vocabulary, but your student book may not. Use this chapter as your <b>vocabulary help desk</b>. The table includes words from the text and the vocabulary boxes at the bottom of the pages.</p>
+<div class="tabs">
+<button class="tab active" onclick="showTab('tab1',this)">Text 1: JB and I</button>
+<button class="tab" onclick="showTab('tab2',this)">Text 2: Girls</button>
+<button class="tab" onclick="showTab('tab3',this)">Text 3: Trouble</button>
+<button class="tab" onclick="showTab('tab4',this)">Text 4: Bad News</button>
+<button class="tab" onclick="showTab('tab5',this)">My unknown words</button>
+</div>
+<div id="tab1" class="vtab"><table class="vocabTable"><tr><th>Word / phrase</th><th>Simple meaning</th><th>German help</th></tr>
+<tr><td>crossover</td><td>a quick basketball move</td><td>schneller Handwechsel beim Dribbeln</td></tr><tr><td>court</td><td>the place where basketball is played</td><td>Spielfeld</td></tr><tr><td>tell sb. apart</td><td>see who is who</td><td>auseinanderhalten</td></tr><tr><td>identical</td><td>looking the same</td><td>identisch</td></tr><tr><td>dreads</td><td>dreadlocks</td><td>Rastalocken</td></tr><tr><td>shaved</td><td>hair cut very short</td><td>glatzköpfig / rasiert</td></tr><tr><td>shooting guard</td><td>a basketball player position</td><td>Spielerposition</td></tr><tr><td>forward</td><td>a basketball player position</td><td>Stürmer / Spielerposition</td></tr><tr><td>phenomenal</td><td>extremely good</td><td>außergewöhnlich gut</td></tr><tr><td>slasher</td><td>a player who moves quickly to the basket</td><td>zum Korb ziehender Spieler</td></tr><tr><td>pass</td><td>give the ball to another player</td><td>passen</td></tr><tr><td>Bible school / religious</td><td>connected with church and faith</td><td>Bibelschule / religiös</td></tr><tr><td>Carolina Blue</td><td>a light blue colour of a university team</td><td>hellblaue Teamfarbe</td></tr></table></div>
+<div id="tab2" class="vtab hidden"><table class="vocabTable"><tr><th>Word / phrase</th><th>Simple meaning</th><th>German help</th></tr>
+<tr><td>bad</td><td>cool / attractive in slang</td><td>cool</td></tr><tr><td>do a double-take</td><td>look again in surprise</td><td>zweimal hinschauen müssen</td></tr><tr><td>free throws</td><td>basketball shots after a foul</td><td>Freiwürfe</td></tr><tr><td>holler</td><td>shout loudly</td><td>brüllen / schreien</td></tr><tr><td>dunk</td><td>push the ball down into the basket</td><td>Dunking / Korbwurf von oben</td></tr><tr><td>embarrassing</td><td>making you feel ashamed</td><td>peinlich</td></tr><tr><td>tights</td><td>tight trousers/leggings</td><td>enge Hose / Leggings</td></tr><tr><td>clownish grin</td><td>a silly wide smile</td><td>albernes Grinsen</td></tr><tr><td>ocean wide</td><td>very wide</td><td>sehr weit geöffnet</td></tr></table></div>
+<div id="tab3" class="vtab hidden"><table class="vocabTable"><tr><th>Word / phrase</th><th>Simple meaning</th><th>German help</th></tr>
+<tr><td>fondled note</td><td>a note touched/held carefully</td><td>Zettel in der Hand</td></tr><tr><td>tight</td><td>unpleasant, difficult, tense</td><td>schwierig / eng</td></tr><tr><td>sick</td><td>ill, or very worried</td><td>krank / schlecht</td></tr><tr><td>crack a window</td><td>open a window a little</td><td>Fenster einen Spalt öffnen</td></tr><tr><td>feverish</td><td>hot and nervous like with fever</td><td>fiebrig / nervös</td></tr><tr><td>commander</td><td>leader, person in control</td><td>Kommandeur</td></tr><tr><td>imbecile</td><td>stupid person</td><td>Dummkopf</td></tr><tr><td>tap</td><td>touch lightly</td><td>antippen</td></tr><tr><td>forehead</td><td>front part of your head</td><td>Stirn</td></tr><tr><td>sweat</td><td>water on your skin when hot/nervous</td><td>Schweiß</td></tr><tr><td>hand over</td><td>give something to someone</td><td>übergeben</td></tr><tr><td>take the heat</td><td>accept blame or trouble for someone</td><td>die Schuld auf sich nehmen</td></tr></table></div>
+<div id="tab4" class="vtab hidden"><table class="vocabTable"><tr><th>Word / phrase</th><th>Simple meaning</th><th>German help</th></tr>
+<tr><td>principal</td><td>head of a school</td><td>Schulleiter/in</td></tr><tr><td>pamphlet</td><td>small information booklet</td><td>Broschüre</td></tr><tr><td>Air Force / Marines</td><td>parts of the military</td><td>Luftwaffe / Marineinfanterie</td></tr><tr><td>website</td><td>internet page</td><td>Webseite</td></tr><tr><td>decent</td><td>good enough, okay</td><td>anständig / ordentlich</td></tr><tr><td>neither … nor</td><td>not this and not that</td><td>weder … noch</td></tr><tr><td>since</td><td>because</td><td>da / weil</td></tr><tr><td>cheating</td><td>being dishonest in a test</td><td>mogeln / schummeln</td></tr><tr><td>matters</td><td>is important</td><td>ist wichtig</td></tr><tr><td>water pipe bursts</td><td>a pipe breaks and water comes out</td><td>Wasserrohr platzt</td></tr><tr><td>head off to</td><td>go to</td><td>losgehen zu</td></tr></table></div>
+<div id="tab5" class="vtab hidden"><div class="paper box"><b>Paper task: My personal vocab list</b><br>Choose at least 8 words you do not know well. On paper, write: English word – simple English explanation – German help – one example sentence.</div><textarea id="unknownWords" placeholder="Optional: type 8 unknown words here, e.g. slasher, pamphlet, take the heat..."></textarea><button onclick="checkUnknown()">Check my vocab list</button><div id="fbUnknown" class="feedback"></div></div>
+<h3>Vocabulary quick check</h3>
+<div class="grid">
+<div class="box">A school head is a <select id="vq1"><option></option><option>principal</option><option>forward</option><option>forehead</option></select></div>
+<div class="box">To accept trouble for someone means to <select id="vq2"><option></option><option>take the heat</option><option>do a double-take</option><option>head off to</option></select></div>
+<div class="box">A silly wide smile is a <select id="vq3"><option></option><option>clownish grin</option><option>free throw</option><option>water pipe burst</option></select></div>
+<div class="box">Not honest in a test is <select id="vq4"><option></option><option>cheating</option><option>decent</option><option>religious</option></select></div>
+</div><button onclick="checkVocab()">Check vocabulary</button><div id="fbVocab" class="feedback"></div>
+</section>
+
+<section class="card" id="phase1"><span class="taskDone" id="done1"></span><h2>Phase 1 – Before Reading: Prediction ⏱ 8 min</h2>
+<p>Look at the titles of the five text parts: <i>JB and I</i>, <i>Girls</i>, <i>How Do You Spell Trouble?</i>, <i>Bad News</i> and the introduction about the twins.</p>
+<h3>1A Online: What might happen?</h3><textarea id="pred" placeholder="Write 3–4 sentences. Use: I think..., Maybe..., This could mean..."></textarea>
+<h3>1B Paper: Prediction boxes</h3><div class="paper box">Draw five boxes on your paper, one for each text part. In each box, write one prediction and one question you have.</div>
+<button onclick="checkPrediction()">Get feedback</button><div id="fbPred" class="feedback"></div>
+</section>
+
+<section class="card" id="phase2"><span class="taskDone" id="done2"></span><h2>Phase 2 – Text 1: “JB and I” ⏱ 15 min</h2>
+<p><b>Read the first text part carefully.</b> Your job is to create two character files.</p>
+<div class="two"><div class="box"><h3>Josh</h3><textarea id="josh" placeholder="appearance, basketball skills, feelings, what he thinks about JB..."></textarea></div><div class="box"><h3>JB</h3><textarea id="jb" placeholder="appearance, basketball skills, interests, what changed..."></textarea></div></div>
+<h3>2B Evidence check</h3><div class="grid"><div class="box">Who is a shooting guard? <select id="t1a"><option></option><option>Josh</option><option>JB</option><option>their mother</option></select></div><div class="box">Who went to summer camps? <select id="t1b"><option></option><option>Josh only</option><option>JB only</option><option>both twins</option></select></div><div class="box">What is JB thinking more about? <select id="t1c"><option></option><option>girls</option><option>homework</option><option>the Air Force</option></select></div></div>
+<h3>2C Paper: Twin comparison</h3><div class="paper box">Draw a Venn diagram: Josh / both / JB. Add at least 4 points for each twin and 2 points for both.</div>
+<button onclick="checkPhase2()">Check Phase 2</button><div id="fb2" class="feedback"></div>
+</section>
+
+<section class="card" id="phase3"><span class="taskDone" id="done3"></span><h2>Phase 3 – Text 2: “Girls” ⏱ 15 min</h2>
+<p><b>Read the second text part.</b> Focus on emotions and the relationship.</p>
+<h3>3A Emotion detective</h3><p>Choose two feelings Josh may have and explain them with evidence.</p><div class="choice"><label><input type="checkbox" name="emo" value="embarrassed"> embarrassed</label><label><input type="checkbox" name="emo" value="jealous"> jealous</label><label><input type="checkbox" name="emo" value="proud"> proud</label><label><input type="checkbox" name="emo" value="lonely"> lonely</label><label><input type="checkbox" name="emo" value="angry"> angry</label></div>
+<textarea id="emoExplain" placeholder="I think Josh feels ... because ... In the text, ..."></textarea>
+<h3>3B Why does Josh say: “I’m the one who can dunk”?</h3><select id="dunkWhy"><option></option><option>He wants attention and wants to show that he is special too.</option><option>He wants to leave school forever.</option><option>He wants to tell the teacher about cheating.</option></select>
+<h3>3C Paper: Relationship thermometer</h3><div class="paper box">Draw a thermometer from 0 to 10. 0 = enemies, 10 = perfect brothers. Mark the relationship after Text 2 and write 3 reasons.</div>
+<button onclick="checkPhase3()">Check Phase 3</button><div id="fb3" class="feedback"></div>
+</section>
+
+<section class="card" id="phase4"><span class="taskDone" id="done4"></span><h2>Phase 4 – Text 3: “How Do You Spell Trouble?” ⏱ 15 min</h2>
+<p><b>Read the third text part.</b> Now the conflict becomes a school problem.</p>
+<h3>4A Put the events in the correct order</h3><p>Write numbers 1–6.</p><div class="grid">
+<div class="box">JB passes / gives Josh a note. <input id="o1" type="number" min="1" max="6"></div>
+<div class="box">The teacher looks directly at Josh. <input id="o2" type="number" min="1" max="6"></div>
+<div class="box">Josh feels very nervous and sweaty. <input id="o3" type="number" min="1" max="6"></div>
+<div class="box">Josh knows what he has to do. <input id="o4" type="number" min="1" max="6"></div>
+<div class="box">A window is opened because the room feels uncomfortable. <input id="o5" type="number" min="1" max="6"></div>
+<div class="box">Josh decides to protect JB / take the heat. <input id="o6" type="number" min="1" max="6"></div></div>
+<h3>4B Online: Josh's thought bubble</h3><textarea id="thought" placeholder="Write 5–6 sentences from Josh's point of view: I am sitting in class... I feel... I should... But..."></textarea>
+<h3>4C Paper: Decision map</h3><div class="paper box">Draw two paths: “Tell the truth” and “Protect JB”. For each path, write 2 possible consequences.</div>
+<button onclick="checkPhase4()">Check Phase 4</button><div id="fb4" class="feedback"></div>
+</section>
+
+<section class="card" id="phase5"><span class="taskDone" id="done5"></span><h2>Phase 5 – Text 4: “Bad News” ⏱ 15 min</h2>
+<p><b>Read the fourth text part.</b> Josh talks to his mother and learns the consequences.</p>
+<h3>5A Reading comprehension</h3><div class="grid">
+<div class="box">Where is Josh? <select id="bn1"><option></option><option>in Mom's office</option><option>on the basketball court</option><option>in the Marines office</option></select></div>
+<div class="box">What is the good news? <select id="bn2"><option></option><option>He will not be suspended.</option><option>He gets a new phone.</option><option>JB wins the game.</option></select></div>
+<div class="box">What is the bad news? <select id="bn3"><option></option><option>Josh cannot go to Duke or any other college because colleges do not accept cheaters.</option><option>Josh moves to another country.</option><option>The teacher leaves school.</option></select></div>
+<div class="box">What does Josh want to say? <select id="bn4"><option></option><option>It was JB and Miss Sweet Tea's fault.</option><option>He wants to join the Marines.</option><option>He wants to stop reading.</option></select></div></div>
+<h3>5B Explain the moral problem</h3><textarea id="moral" placeholder="Explain in 6–8 sentences: What is unfair? What is Josh's mistake? What is JB's mistake? What would you do?"></textarea>
+<h3>5C Paper: Evidence table</h3><div class="paper box">Create a table with 3 columns: Event – What Josh feels – Why it matters for the brothers. Add at least 5 rows.</div>
+<button onclick="checkPhase5()">Check Phase 5</button><div id="fb5" class="feedback"></div>
+</section>
+
+<section class="card" id="phase6"><span class="taskDone" id="done6"></span><h2>Phase 6 – Final Writing: Dialogue after school ⏱ 12 min</h2>
+<p>Write a short dialogue between Josh and JB later that day. They must talk about the note, the girl, basketball and trust.</p>
+<div class="hint"><b>Your dialogue must include:</b> 8–12 lines, at least 6 vocabulary words from the vocabulary chapter, one apology, one accusation, one possible solution.</div>
+<textarea id="dialogue" placeholder="Josh: ...&#10;JB: ...&#10;Josh: ..."></textarea>
+<button onclick="checkDialogue()">Check dialogue language & content</button><div id="fbDialogue" class="feedback"></div>
+</section>
+
+<section class="card" id="phase7"><span class="taskDone" id="done7"></span><h2>Phase 7 – Creative Product ⏱ 13 min</h2>
+<p>Choose <b>one</b> product. You may prepare it on paper or digitally.</p>
+<div class="grid">
+<div class="box"><h3>Option A: Storyboard</h3><p>Create 6 panels: twins before conflict – JB changes – girl scene – note/test – Mom's office – future solution.</p></div>
+<div class="box"><h3>Option B: Locker Room Poster</h3><p>Title: “Brothers or Rivals?” Add 4 key words, 2 quotes/short text references and one advice sentence.</p></div>
+<div class="box"><h3>Option C: Voice Message</h3><p>Record Josh's 60-second message to JB. Include feelings, problem and solution.</p></div>
+<div class="box"><h3>Option D: Instagram-style Post</h3><p>Create a picture idea, caption and 3 comments from Josh/JB/friend.</p></div></div>
+<h3>Planning note</h3><textarea id="creative" placeholder="I choose option ... My product will show ... I will use these vocabulary words: ..."></textarea>
+<button onclick="checkCreative()">Check final product plan</button><div id="fbCreative" class="feedback"></div>
+</section>
+
+<section class="card"><h2>Final Exit Ticket ⏱ 5 min</h2>
+<div class="grid"><div class="box">1. What did JB do wrong?<textarea id="exit1" class="mini"></textarea></div><div class="box">2. What did Josh do right and wrong?<textarea id="exit2" class="mini"></textarea></div><div class="box">3. What can teenagers learn from the story?<textarea id="exit3" class="mini"></textarea></div><div class="box">4. Which 8 words can you remember?<textarea id="exit4" class="mini"></textarea></div></div>
+<button onclick="finalCheck()">Final check</button><div id="fbFinal" class="feedback"></div></section>
+
+<section class="card"><h2>Teacher check rubric</h2><table class="rubric"><tr><th>Area</th><th>Excellent</th><th>Good / OK</th><th>Needs work</th></tr><tr><td>Vocabulary</td><td>Uses many story words correctly.</td><td>Uses some story words.</td><td>Uses few words or many are unclear.</td></tr><tr><td>Reading</td><td>Shows clear understanding with evidence.</td><td>Understands main events.</td><td>Misses important events.</td></tr><tr><td>Writing</td><td>Clear, connected sentences, few mistakes.</td><td>Understandable with some mistakes.</td><td>Very short or difficult to understand.</td></tr><tr><td>Paper tasks</td><td>Complete and careful.</td><td>Mostly complete.</td><td>Incomplete.</td></tr><tr><td>Creative product</td><td>Uses content and shows own thinking.</td><td>Shows the main story.</td><td>Too general or not connected enough.</td></tr></table></section>
+<div class="footer">Independent simulation for classroom use. Students should keep their paper tasks and printed/ saved results.</div>
+</div>
+<script>
+let completed=0; const total=9; function mark(id){document.getElementById(id).textContent='✓ done'; updateProgress();} function updateProgress(){completed=document.querySelectorAll('.taskDone').length?[...document.querySelectorAll('.taskDone')].filter(x=>x.textContent).length:0;document.getElementById('bar').style.width=Math.round(completed/total*100)+'%';}
+let sec=90*60; setInterval(()=>{if(sec>0){sec--;let m=String(Math.floor(sec/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');document.getElementById('timer').textContent=m+':'+s;}},1000);
+function showTab(id,btn){document.querySelectorAll('.vtab').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');}
+function words(t){return (t||'').trim().split(/\s+/).filter(Boolean).length} function sentences(t){return ((t||'').match(/[.!?]/g)||[]).length} function hasAny(t,arr){t=(t||'').toLowerCase();return arr.some(w=>t.includes(w.toLowerCase()))} function feedbackBase(t,minw,mins){let out=[]; if(words(t)<minw) out.push('Write more details. Aim for at least '+minw+' words.'); if(sentences(t)<mins) out.push('Use full sentences with capital letters and full stops.'); if(/\bi\b/.test(t)) out.push('Orthography: Write “I” with a capital letter.'); if(/because because/i.test(t)) out.push('Check repetition: use “because” only once in one reason.'); if(/\bhe are\b|\bshe are\b|\bit are\b/i.test(t)) out.push('Grammar: Use “he/she/it is”, not “are”.'); if(/\bdoesn\b/i.test(t)) out.push('Spelling: Write “doesn’t”.'); return out;}
+function setFB(id,good,notes){let el=document.getElementById(id); el.className='feedback '+(good?'ok':'warn'); el.innerHTML=(good?'✅ ':'⚠️ ')+notes.join('<br>');}
+function checkUnknown(){let t=document.getElementById('unknownWords').value; let n=t.split(/[,\n]/).filter(x=>x.trim()).length; setFB('fbUnknown',n>=8,[n>=8?'Good. You listed at least 8 words. Now make sure you also write example sentences on paper.':'Add more words. You need at least 8 unknown words.']); if(n>=8)mark('doneV');}
+function checkVocab(){let ok=vq1.value=='principal'&&vq2.value=='take the heat'&&vq3.value=='clownish grin'&&vq4.value=='cheating'; setFB('fbVocab',ok,[ok?'All vocabulary answers are correct.':'Check the vocabulary table again. Pay special attention to school words and phrases.']); if(ok)mark('doneV');}
+function checkPrediction(){let t=pred.value;let notes=feedbackBase(t,25,3); if(!hasAny(t,['think','maybe','could','might']))notes.push('Use prediction language: I think / Maybe / This could mean / might.'); let good=notes.length==0; if(good)notes.push('Good prediction. You used complete sentences and prediction language.'); setFB('fbPred',good,notes); if(good)mark('done1');}
+function checkPhase2(){let notes=[]; if(t1a.value!='JB')notes.push('Check who is the shooting guard.'); if(t1b.value!='Josh only')notes.push('Check who went to summer camps.'); if(t1c.value!='girls')notes.push('Check what JB is thinking more about now.'); if(words(josh.value)<18)notes.push('Add more details to Josh’s character file.'); if(words(jb.value)<18)notes.push('Add more details to JB’s character file.'); if(!hasAny(josh.value+jb.value,['court','forward','shooting guard','phenomenal','slasher','pass','shaved','dreads']))notes.push('Use at least two vocabulary words from Text 1.'); let good=notes.length==0; if(good)notes.push('Good character work. You understood similarities and differences.'); setFB('fb2',good,notes); if(good)mark('done2');}
+function checkPhase3(){let selected=[...document.querySelectorAll('input[name="emo"]:checked')].map(x=>x.value);let notes=feedbackBase(emoExplain.value,25,2); if(selected.length<2)notes.push('Choose at least two emotions.'); if(dunkWhy.value!='He wants attention and wants to show that he is special too.')notes.push('Think about why Josh wants to show what he can do.'); if(!hasAny(emoExplain.value,['because','text','girl','JB','dunk','embarrass','jealous','attention']))notes.push('Explain your ideas with evidence from the text.'); let good=notes.length==0; if(good)notes.push('Good emotion analysis. You connected feelings with evidence.'); setFB('fb3',good,notes); if(good)mark('done3');}
+function checkPhase4(){let vals=[o1.value,o2.value,o3.value,o4.value,o5.value,o6.value].join(','); let notes=[]; let correct=['1','3','4','5','2','6']; [o1,o2,o3,o4,o5,o6].forEach((el,i)=>{if(el.value!=correct[i])notes.push('One event number is not correct. Re-read the order of the classroom scene.');}); notes=[...new Set(notes)]; notes=notes.concat(feedbackBase(thought.value,40,5)); if(!hasAny(thought.value,['note','JB','teacher','sweat','heat','nervous','truth']))notes.push('Use story words such as note, teacher, sweat, take the heat or truth.'); let good=notes.length==0; if(good)notes.push('Good. You understood the classroom problem and Josh’s decision.'); setFB('fb4',good,notes); if(good)mark('done4');}
+function checkPhase5(){let notes=[]; if(bn1.value!='in Mom\'s office')notes.push('Check the place at the beginning of “Bad News”.'); if(bn2.value!='He will not be suspended.')notes.push('Check the good news.'); if(bn3.value!='Josh cannot go to Duke or any other college because colleges do not accept cheaters.')notes.push('Check the bad news: What consequence does cheating have for Josh’s college dream?'); if(bn4.value!='It was JB and Miss Sweet Tea\'s fault.')notes.push('Check what Josh wants to tell his mother.'); notes=notes.concat(feedbackBase(moral.value,55,6)); if(!hasAny(moral.value,['unfair','mistake','JB','Josh','cheating','fault','because','would']))notes.push('Explain unfairness, mistakes and what you would do.'); let good=notes.length==0; if(good)notes.push('Good moral explanation. You included consequences and responsibility.'); setFB('fb5',good,notes); if(good)mark('done5');}
+function checkDialogue(){let t=dialogue.value;let notes=feedbackBase(t,80,8); let lines=t.split('\n').filter(x=>x.trim()).length; if(lines<8)notes.push('Write at least 8 dialogue lines. Use Josh: and JB:.'); if(!/Josh:/i.test(t)||!/JB:/i.test(t))notes.push('Use speaker names: Josh: and JB:.'); if(!hasAny(t,['sorry','apologize']))notes.push('Add an apology.'); if(!hasAny(t,['fault','cheating','note','girl','basketball','trust']))notes.push('Mention the note/cheating problem, the girl or basketball/trust.'); let vocab=['court','pass','dunk','embarrassing','cheating','decent','sweat','free throws','take the heat','principal','phenomenal','forward','shooting guard','head off']; let used=vocab.filter(w=>t.toLowerCase().includes(w)).length; if(used<6)notes.push('Use at least 6 vocabulary words. You used about '+used+'.'); let good=notes.length==0; if(good)notes.push('Strong dialogue. Content, structure and vocabulary are clear.'); setFB('fbDialogue',good,notes); if(good)mark('done6');}
+function checkCreative(){let t=creative.value;let notes=feedbackBase(t,30,3); if(!hasAny(t,['storyboard','poster','voice','instagram','option']))notes.push('Name your chosen option.'); if(!hasAny(t,['vocabulary','words','Josh','JB','conflict','brothers']))notes.push('Explain how your product connects to the story.'); let good=notes.length==0; if(good)notes.push('Good product plan. Now create it on paper or digitally.'); setFB('fbCreative',good,notes); if(good)mark('done7');}
+function finalCheck(){let all=exit1.value+' '+exit2.value+' '+exit3.value+' '+exit4.value;let notes=feedbackBase(all,55,6); if(exit4.value.split(/[,\s\n]+/).filter(Boolean).length<8)notes.push('Add at least 8 vocabulary words in question 4.'); let good=notes.length==0; if(good)notes.push('Exit ticket complete. Save or print your work.'); setFB('fbFinal',good,notes);}
+
+function esc(s){return String(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function plain(s){return String(s||'').replace(/\r/g,'').trim();}
+function collectWorkText(){
+  const labels={
+    unknownWords:'Unknown vocabulary words', pred:'Prediction', josh:'Character file: Josh', jb:'Character file: JB', emoExplain:'Emotion explanation', thought:"Josh's thought bubble", moral:'Moral problem', dialogue:'Dialogue after school', creative:'Creative product plan', exit1:'Exit ticket 1: What did JB do wrong?', exit2:'Exit ticket 2: What did Josh do right and wrong?', exit3:'Exit ticket 3: What can teenagers learn?', exit4:'Exit ticket 4: Vocabulary words'
+  };
+  let out=[];
+  out.push('THE CROSSOVER – STUDENT WORK');
+  out.push('Date: '+new Date().toLocaleString());
+  out.push('');
+  Object.keys(labels).forEach(id=>{let el=document.getElementById(id); if(el){out.push('--- '+labels[id]+' ---'); out.push(plain(el.value)||'[no answer]'); out.push('');}});
+  out.push('--- Selected / checked answers ---');
+  document.querySelectorAll('select,input[type="number"]').forEach(el=>{if(el.id) out.push(el.id+': '+(el.value||'[empty]'));});
+  let emos=[...document.querySelectorAll('input[name="emo"]:checked')].map(x=>x.value); out.push('emotions: '+(emos.length?emos.join(', '):'[none selected]'));
+  return out.join('\n');
+}
+function collectWork(){
+  const text=collectWorkText();
+  return '<h1>The Crossover – Student Work</h1><p><b>Date:</b> '+new Date().toLocaleString()+'</p><pre class="answer">'+esc(text)+'</pre>';
+}
+function buildReportHTML(){
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>The Crossover Student Work</title><style>body{font-family:Arial,Helvetica,sans-serif;line-height:1.45;margin:28px}h1{color:#24124d}.answer{border:1px solid #ccc;border-radius:8px;padding:12px;white-space:pre-wrap;background:#fafafa}.printBtn{background:#0f766e;color:white;border:0;border-radius:8px;padding:10px 14px;font-weight:bold}@media print{.printBtn{display:none}}</style></head><body><button class="printBtn" onclick="window.print()">Print / Save as PDF</button>'+collectWork()+'</body></html>';
+}
+function showExportBox(text, message){
+  let box=document.getElementById('exportBox');
+  if(!box){
+    box=document.createElement('div');
+    box.id='exportBox';
+    box.className='card';
+    box.style.border='3px solid #0f766e';
+    box.innerHTML='<h2>Download / Save fallback</h2><p id="exportMsg"></p><textarea id="exportText" style="min-height:260px"></textarea><br><button onclick="copyWork()">Copy results</button><button class="secondary" onclick="document.getElementById(\'exportBox\').remove()">Close</button>';
+    document.querySelector('.wrap').prepend(box);
+  }
+  document.getElementById('exportMsg').textContent=message || 'If the file download is blocked, copy this text and paste it into Word, Pages, Notes or an email.';
+  document.getElementById('exportText').value=text;
+  box.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function downloadBlob(blob, filename){
+  if(window.navigator && window.navigator.msSaveOrOpenBlob){window.navigator.msSaveOrOpenBlob(blob, filename); return true;}
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename; a.rel='noopener'; a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{try{document.body.removeChild(a);}catch(e){} URL.revokeObjectURL(url);},4000);
+  return true;
+}
+function downloadWork(){
+  const text=collectWorkText();
+  const filename='the_crossover_student_work.txt';
+  try{
+    const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+    downloadBlob(blob, filename);
+    showExportBox(text,'A text file download has been started. If your tablet/browser blocks downloads, copy the results below and paste them into Word, Pages, Notes or an email.');
+  }catch(e){
+    const data='data:text/plain;charset=utf-8,'+encodeURIComponent(text);
+    try{window.open(data,'_blank');}catch(err){}
+    showExportBox(text,'The automatic download was blocked. Copy the results below and save them manually.');
+  }
+}
+async function copyWork(){
+  const text=collectWorkText();
+  try{
+    if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(text); alert('Results copied. Students can now paste them into Word, Pages, Notes or an email.');}
+    else {showExportBox(text,'Clipboard access is blocked in this browser. Select the text below, copy it and paste it into Word, Pages, Notes or an email.');}
+  }catch(e){showExportBox(text,'Clipboard access is blocked in this browser. Select the text below, copy it and paste it into Word, Pages, Notes or an email.');}
+}
+function saveWork(){
+  let data={};
+  document.querySelectorAll('textarea,input,select').forEach((el,i)=>{
+    let key=el.id || el.name || ('field_'+i);
+    if(el.type==='checkbox' || el.type==='radio') data[key+'_'+el.value]=el.checked;
+    else data[key]=el.value;
+  });
+  try{localStorage.setItem('crossoverWorkV5',JSON.stringify(data)); alert('Your work was saved in this browser on this device. Use “Load saved work” to restore it later.');}
+  catch(e){showExportBox(collectWorkText(),'Browser saving is blocked. Copy or download your results instead.');}
+}
+function loadWork(){
+  let raw=localStorage.getItem('crossoverWorkV5') || localStorage.getItem('crossoverWorkV2') || '{}';
+  let data={};
+  try{data=JSON.parse(raw);}catch(e){data={};}
+  document.querySelectorAll('textarea,input,select').forEach((el,i)=>{
+    let key=el.id || el.name || ('field_'+i);
+    if(el.type==='checkbox' || el.type==='radio') el.checked=!!data[key+'_'+el.value];
+    else if(data[key]!==undefined) el.value=data[key];
+  });
+  alert('Saved work loaded from this browser/device.');
+}
+function printReport(){
+  const w=window.open('','_blank');
+  if(w){w.document.open(); w.document.write(buildReportHTML()); w.document.close();}
+  else {downloadWork();}
+}
+</script>
+</body>
+</html>
